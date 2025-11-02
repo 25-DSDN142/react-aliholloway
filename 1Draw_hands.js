@@ -17,9 +17,7 @@ let pos_y = 200;
 
 
 function drawInteraction(faces, hands) {
-
   image(bgImage, 0, 0, 640, 360);
-
   // hands part
   // for loop to capture if there is more than one hand on the screen. This applies the same process to all hands.
   for (let i = 0; i < hands.length; i++) {
@@ -39,20 +37,15 @@ function drawInteraction(faces, hands) {
     /*
     Start drawing on the hands here
     */
-
-
     // update position values
     pos_x = indexFingerTipX;
     pos_y = indexFingerTipY;
 
     pos_history.push({ pos_x, pos_y });
-
-
       // Limit the history length
      if (pos_history.length > num_frames_tracer) {
        pos_history.shift(); // remove oldest
      }
-
 
     //fill(0, 225, 0);
     //ellipse(indexFingerTipX, indexFingerTipY, 30, 30);
@@ -60,7 +53,6 @@ function drawInteraction(faces, hands) {
      noStroke();
      let radius = 0.3;
 
-     
      // draw ellipse tracer
     for (let j = 0; j < pos_history.length; j++) {
       let p = pos_history[j];      
@@ -73,11 +65,6 @@ function drawInteraction(faces, hands) {
       ellipse(p.pos_x, p.pos_y, j * radius, j * radius);
     }
     
-
-
-
-
-
     // drawPoints(hand)
 
     //fingerPuppet(indexFingerTipX, indexFingerTipY);
