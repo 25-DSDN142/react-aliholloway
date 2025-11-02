@@ -8,6 +8,13 @@ function prepareInteraction() {
 }
 
 function drawInteraction(faces, hands) {
+
+  let color_red = (255, 0, 0);
+  let color_orange = (255, 123, 0);
+  let color_yellow = (255, 255, 0);
+  let color_green = (0, 255, 0);
+  let color_blue = (0, 0, 255);
+
   // hands part
   // for loop to capture if there is more than one hand on the screen. This applies the same process to all hands.
   for (let i = 0; i < hands.length; i++) {

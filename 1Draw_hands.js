@@ -1,10 +1,25 @@
 // ----=  HANDS  =----
 /* load images here */
+
+let bgImage;
+
 function prepareInteraction() {
-  //bgImage = loadImage('/images/background.png');
+  bgImage = loadImage('/images/flowerBgImage_1280x720.png');
 }
 
+
+
+let num_frames_tracer = 120;
+let pos_history = [];
+
+let pos_x = 200;
+let pos_y = 200;
+
+
 function drawInteraction(faces, hands) {
+
+  image(bgImage, 0, 0, 640, 360);
+
   // hands part
   // for loop to capture if there is more than one hand on the screen. This applies the same process to all hands.
   for (let i = 0; i < hands.length; i++) {
@@ -25,8 +40,43 @@ function drawInteraction(faces, hands) {
     Start drawing on the hands here
     */
 
-    fill(225, 225, 0);
-    ellipse(indexFingerTipX, indexFingerTipY, 30, 30);
+
+    // update position values
+    pos_x = indexFingerTipX;
+    pos_y = indexFingerTipY;
+
+    pos_history.push({ pos_x, pos_y });
+
+
+      // Limit the history length
+     if (pos_history.length > num_frames_tracer) {
+       pos_history.shift(); // remove oldest
+     }
+
+
+    //fill(0, 225, 0);
+    //ellipse(indexFingerTipX, indexFingerTipY, 30, 30);
+
+     noStroke();
+     let radius = 0.3;
+
+     
+     // draw ellipse tracer
+    for (let j = 0; j < pos_history.length; j++) {
+      let p = pos_history[j];      
+      let t = j / pos_history.length; // 0..1
+      let r = lerp(225, 0, t);        // red fades out
+      let g = lerp(0, 225, t);        // green grows
+      let b = 0;
+      let a = (pos_history.length - j) / pos_history.length * 255; // fade with time
+      fill(r, g, b, a);
+      ellipse(p.pos_x, p.pos_y, j * radius, j * radius);
+    }
+    
+
+
+
+
 
     // drawPoints(hand)
 
